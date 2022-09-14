@@ -2,9 +2,9 @@
 
 - ⛏️ Project Created using **Xcode 14 RC** and **SwiftUI Framework** using **Swift Programming Language**.
 
-- 📱 It supports **iOS 14.0+** Devices.
+- 📱 It supports **iOS 14.0+** devices.
 
-- 👩‍🎨 Design idea is a modified version of Asish Sunny's Dribbble Design [https://dribbble.com/shots/11474539-Weather-App/attachments/3092071?mode=media](Weather App)
+- 👩‍🎨 Design idea is a modified version of Asish Sunny's Dribbble Design [https://dribbble.com/shots/11474539-Weather-App/attachments/3092071?mode=media](https://dribbble.com/shots/11474539-Weather-App/attachments/3092071?mode=media)
 
 - 📲 App is currently in JUST **portrait** mode, so maybe in future with better design; **landscape** orientation will be added.
 
