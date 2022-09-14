@@ -16,7 +16,11 @@ struct WeatherDescription: Codable {
     let description: String
 }
 
-struct WeatherData: Codable {
+struct WeatherData: Codable, Equatable {
+    static func == (lhs: WeatherData, rhs: WeatherData) -> Bool {
+        lhs.datetime == rhs.datetime
+    }
+    
     let moonrise_ts: Int
     let sunset_ts: Int
     let wind_cdir: String

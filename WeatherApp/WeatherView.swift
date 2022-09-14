@@ -31,6 +31,7 @@ struct WeatherForecastDaysView: View {
             
         }
         .padding(.horizontal)
+        .background(RoundedRectangle(cornerRadius: 8).foregroundColor(Color.secondary.opacity(0.05)))
     }
     
     var body: some View {
@@ -40,19 +41,35 @@ struct WeatherForecastDaysView: View {
                 .foregroundColor(.primary)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .center, spacing: 0) {
+                HStack(alignment: .center, spacing: 8) {
                     ForEach(range) { index in
                         getDayView(item: items[index])
                             .onTapGesture {
                                 detailData = items[index]
-                                isPresented.toggle()
                             }
                     }
                 }
             }
         }
+        .onChange(of: isPresented, perform: { newValue in
+            if isPresented == false {
+                detailData = nil
+            }
+        })
+        .onChange(of: detailData, perform: { newValue in
+            if newValue != nil {
+                isPresented.toggle()
+            }
+        })
         .sheet(isPresented: $isPresented, content: {
-            Text(detailData?.datetime ?? "no data!")
+            if let detailData = detailData {
+                WeatherDetailsView(data: detailData)
+            } else {
+                Text("No Data!")
+                    .onAppear {
+                        isPresented = false
+                    }
+            }
         })
         .padding()
         .background(Color("Background").cornerRadius(12))
@@ -114,49 +131,51 @@ struct WeatherView: View {
             Text("")
                 .padding(.top, 5)
             VStack(alignment: .center, spacing: 24) {
-                
-                VStack {
-                    
-                    HStack {
-                        VStack(alignment: .leading, spacing: -4) {
-                            Text(data.city_name)
-                                .font(.largeTitle)
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.primary)
-                            Text(today?.ts.toStringDate() ?? "")
-                                .font(.title2)
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.secondary)
+                if let today = today {
+                    VStack {
+                        
+                        HStack {
+                            VStack(alignment: .leading, spacing: -4) {
+                                Text(data.city_name)
+                                    .font(.largeTitle)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.primary)
+                                Text(today.ts.toStringDate())
+                                    .font(.title2)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
                         }
                         
-                        Spacer()
-                    }
-                    
-                    VStack(spacing: 8) {
-                        Image(today?.weather.icon ?? "c01n")
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                        Text("\(today?.temp ?? 0.0, specifier: "%.1f")°C")
-                            .font(.largeTitle.bold())
-                            .foregroundColor(.primary)
-                        Text(today?.weather.description ?? "unknown")
-                            .font(.title2)
-                            .foregroundColor(.secondary)
+                        VStack(spacing: 8) {
+                            Image(today.weather.icon)
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                            Text("\(today.temp, specifier: "%.1f")°C")
+                                .font(.largeTitle.bold())
+                                .foregroundColor(.primary)
+                            Text(today.weather.description)
+                                .font(.title2)
+                                .foregroundColor(.secondary)
+                            
+                        }
                         
                     }
+                    .padding()
+                    .background(Color("Background").cornerRadius(12))
                     
+                    WeatherMaxMinDegreeView(max: today.max_temp, min: today.min_temp)
                 }
-                .padding()
-                .background(Color("Background").cornerRadius(12))
                 
-                WeatherMaxMinDegreeView(max: today?.max_temp ?? 0, min: today?.min_temp ?? 0)
-                
-                WeatherForecastDaysView(title: "Next 5 Days Forecast", range: 1..<6, items: data.data)
-                
-                WeatherForecastDaysView(title: "Near Future Forecase", range: 6..<11, items: data.data)
-                
-                WeatherForecastDaysView(title: "Far Future Forecast", range: 11..<16, items: data.data)
-                
+                if data.data.count > 15 {
+                    WeatherForecastDaysView(title: "Next 5 Days Forecast", range: 1..<6, items: data.data)
+                    
+                    WeatherForecastDaysView(title: "Near Future Forecase", range: 6..<11, items: data.data)
+                    
+                    WeatherForecastDaysView(title: "Far Future Forecast", range: 11..<16, items: data.data)
+                }
             }
             Text("")
                 .padding(.vertical, 5)

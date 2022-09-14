@@ -11,7 +11,14 @@ extension Int {
     func toStringDate() -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE h a"
+        dateFormatter.dateFormat = "EEEE, MMM d"
+        return dateFormatter.string(from: date)
+    }
+    
+    func toStringClockDate() -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(self))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
     }
 }

@@ -15,6 +15,7 @@
 		1C579B1E28D0696B00D1B3BA /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C579B1D28D0696B00D1B3BA /* WeatherView.swift */; };
 		1C579B2028D07CA500D1B3BA /* Int+FormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C579B1F28D07CA500D1B3BA /* Int+FormattedDate.swift */; };
 		1C579B2228D0C35700D1B3BA /* String+FormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C579B2128D0C35700D1B3BA /* String+FormattedDate.swift */; };
+		1CDD09CD28D0F678002B9202 /* WeatherDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDD09CC28D0F678002B9202 /* WeatherDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1C579B1D28D0696B00D1B3BA /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		1C579B1F28D07CA500D1B3BA /* Int+FormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+FormattedDate.swift"; sourceTree = "<group>"; };
 		1C579B2128D0C35700D1B3BA /* String+FormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FormattedDate.swift"; sourceTree = "<group>"; };
+		1CDD09CC28D0F678002B9202 /* WeatherDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				1C1E50A128D03EC000EE2532 /* WeatherAppApp.swift */,
 				1C1E50A328D03EC000EE2532 /* ContentView.swift */,
 				1C579B1D28D0696B00D1B3BA /* WeatherView.swift */,
+				1CDD09CC28D0F678002B9202 /* WeatherDetailsView.swift */,
 				1C579B2128D0C35700D1B3BA /* String+FormattedDate.swift */,
 				1C579B1F28D07CA500D1B3BA /* Int+FormattedDate.swift */,
 				1C579B1B28D062E600D1B3BA /* WeatherModels.swift */,
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CDD09CD28D0F678002B9202 /* WeatherDetailsView.swift in Sources */,
 				1C579B1C28D062E600D1B3BA /* WeatherModels.swift in Sources */,
 				1C579B2228D0C35700D1B3BA /* String+FormattedDate.swift in Sources */,
 				1C1E50A428D03EC000EE2532 /* ContentView.swift in Sources */,
