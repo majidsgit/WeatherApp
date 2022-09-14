@@ -13,18 +13,31 @@ struct WeatherUVView: View {
     
     private func getStatus() -> String {
         switch uv {
-        case 0...2:
+        case 0..<3:
             return "Low"
-        case 3...5:
+        case 3..<6:
             return "Medium"
-        case 6...7:
+        case 6..<8:
             return "High"
-        case 8...10:
+        case 8..<11:
             return "Very High"
         case 11...:
             return "Extremely High"
         default:
             return "Unknown"
+        }
+    }
+    
+    private func getFontSize() -> Font {
+        switch uv {
+        case 0..<3:
+            return .subheadline
+        case 3..<8:
+            return .subheadline.weight(.bold)
+        case 8...:
+            return .headline.weight(.black)
+        default:
+            return .subheadline
         }
     }
     
@@ -47,11 +60,11 @@ struct WeatherUVView: View {
                 Text("UV Indicator")
                     .font(.headline.weight(.black))
                     .foregroundColor(.primary)
-
+                
                 Spacer()
                 
-                Text(getStatus())
-                    .font(.subheadline)
+                Text("\(getStatus()): \(uv, specifier: "%.1f")")
+                    .font(getFontSize())
                     .foregroundColor(.primary)
                 
             }
@@ -71,20 +84,12 @@ struct WeatherUVView: View {
                     
                     Circle()
                         .frame(width: 14)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .offset(x: getX(geoWidth: geo.size.width, itemWidth: 14))
                         .offset(y: -2)
-                    
-                    Text("\(uv, specifier: "%.1f")")
-                        .font(.subheadline.weight(uv > 8 ? .black : (uv > 3 ? .bold : .regular ) ))
-                        .foregroundColor(.primary)
-                        .offset(x: getX(geoWidth: geo.size.width, itemWidth: 33))
-                        .offset(y: -22)
-                        .multilineTextAlignment( getX(geoWidth: geo.size.width, itemWidth: 0) >= geo.size.width ? .trailing : .leading)
-                    
                 }
             }
-                .frame(height: 14)
+            .frame(height: 14)
         }
         .padding()
         .background(Color("Background").cornerRadius(12))
@@ -182,9 +187,6 @@ struct WeatherDetailsView: View {
                 WeatherMaxMinDegreeView(max: data.max_temp, min: data.min_temp)
 
                 WeatherUVView(uv: data.uv)
-                WeatherUVView(uv: 0)
-                WeatherUVView(uv: 11)
-                WeatherUVView(uv: 18)
                 
                 WeatherSunAndMoonDegreeView(heading: "Sun Time", title1: "Rise", icon1: "sunrise.fill", rise: data.sunrise_ts, title2: "Set", icon2: "sunset", set: data.sunset_ts)
                 
